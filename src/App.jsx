@@ -1,12 +1,16 @@
-import BlogLİst from './components/BlogList/BlogList'
+import BlogList from "./components/BlogList/BlogList";
+import "./index.css";
 
-function App() {
+const App = () => {
   return (
     <>
-      <BlogLİst/>
+      <div className="flex justify-center min-h-screen bg-gray-100 p-10">
+        <div className="container">
+          <BlogList/>
+        </div>
+      </div>
     </>
   );
-}
+};
 
 export default App;
-
