@@ -1,8 +1,9 @@
-import BlogInput from './BlogInput.jsx'
+import BlogInput from './BlogInput.jsx';
 import { useState } from 'react';
 import PropTypes from "prop-types";
 import Button from '../UI/Button.jsx';
-import './AddNewBlog.css'
+import Modal from '../../components/UI/Modal.jsx';
+import './AddNewBlog.css';
 
 const blogInputs = [
   {
@@ -38,43 +39,64 @@ const blogInputs = [
 ];
 
 const AddNewBlog = ({ handleSubmit }) => {
-  const [blogData, setblogData] = useState({
+  const [blogData, setBlogData] = useState({
     title: "",
     image: "",
     content: "",
     author: "",
-    createDate:""
+    createDate: "",
   });
+  const [isShowModal, setIsShowModal] = useState(false);
 
-  function handleChange({ target: { name, value } }) {
-    setblogData({ ...blogData, [name]: value });
-  }
+  const handleChange = ({ target: { name, value } }) => {
+    setBlogData({ ...blogData, [name]: value });
+  };
 
-  function onSubmit(event) {
+  const onSubmit = (event) => {
     event.preventDefault();
+
+    const isFormValid = Object.values(blogData).every(
+      (value) => value.trim() !== ""
+    );
+
+    if (!isFormValid) {
+      setIsShowModal(true);
+      return;
+    }
     handleSubmit(blogData);
-  }
+    setBlogData({
+      title: "",
+      image: "",
+      content: "",
+      author: "",
+      createDate: "",
+    });
+  };
 
   return (
     <>
-      <div className="p-4 bg-white shadow-md m-2 rounded-md">
-        <h2 className="font-bold">Yeni Blog Ekle</h2>
-        <form className="blog-form" onSubmit={onSubmit}>
-          {blogInputs.map((input, index) => (
-            <BlogInput key={index} {...input} handleChange={handleChange} />
-          ))}
+      <form className="blog-form mt-2" onSubmit={onSubmit}>
+        {blogInputs.map((input, index) => (
+          <BlogInput key={index} {...input} handleChange={handleChange} value={blogData[input.name]} />
+        ))}
 
-          <Button size="sm" color="success">
-            Blog Ekle
-          </Button>
-        </form>
-      </div>
+        <Button size="md" color="success">
+          Yeni Blog Ekle
+        </Button>
+      </form>
+      {isShowModal && (
+        <Modal
+          setIsShowModal={setIsShowModal}
+          title="Zorunlu Alanlar"
+          desc="Lütfen tüm alanları girin!"
+        />
+      )}
     </>
   );
 };
 
 AddNewBlog.propTypes = {
-  handleSubmit: PropTypes.func,
+  handleSubmit: PropTypes.func.isRequired,
 };
 
 export default AddNewBlog;

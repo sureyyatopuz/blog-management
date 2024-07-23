@@ -4,14 +4,16 @@
     gap: 16px;
     width: 250px;
     padding: 20px;
+    /* border: 1px solid #ccc; */
     border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    background-color: white;
     margin-bottom: 20px;
   }
 
   .blog-input {
     display: flex;
     flex-direction: column;
-    gap: 8px;
   }
 
   .blog-input label {
