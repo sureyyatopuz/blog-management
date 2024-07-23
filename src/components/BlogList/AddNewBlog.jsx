@@ -2,6 +2,7 @@ import BlogInput from './BlogInput.jsx'
 import { useState } from 'react';
 import PropTypes from "prop-types";
 import Button from '../UI/Button.jsx';
+import './AddNewBlog.css'
 
 const blogInputs = [
   {
@@ -58,12 +59,12 @@ const AddNewBlog = ({ handleSubmit }) => {
     <>
       <div className="p-4 bg-white shadow-md m-2 rounded-md">
         <h2 className="font-bold">Yeni Blog Ekle</h2>
-        <form className="product-form" onSubmit={onSubmit}>
+        <form className="blog-form" onSubmit={onSubmit}>
           {blogInputs.map((input, index) => (
             <BlogInput key={index} {...input} handleChange={handleChange} />
           ))}
 
-          <Button size="lg" color="success">
+          <Button size="sm" color="success">
             Blog Ekle
           </Button>
         </form>

@@ -5,7 +5,7 @@ export const blogData = [
       "Yapay zeka, birçok sektörde devrim yaratıyor. Sağlık, finans, eğitim gibi alanlarda yapay zeka uygulamaları hızla yayılıyor.",
     author: "Ahmet Yılmaz",
     createDate: "2024-07-01",
-    image: "https://via.placeholder.com/150/0000FF/808080?text=AI+Future",
+    image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT8ZrXK3YNiB5g7sr0HNwoOAcbFWsKduDmYAbLB4dRLNMWSfvsIrZ8JQzQJpcknQtrLlMU&usqp=CAU",
   },
   {
     title: "5G Teknolojisi ve Mobil İletişimin Geleceği",

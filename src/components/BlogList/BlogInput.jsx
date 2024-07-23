@@ -2,7 +2,7 @@ import PropTypes from "prop-types";
 
 const BlogInput = ({ handleChange, label, placeholder, name, type }) => {
   return (
-    <div className="">
+    <div className="blog-input">
       <label>{label}</label>
       <input
         type={type}
