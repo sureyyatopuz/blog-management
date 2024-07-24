@@ -1,5 +1,5 @@
 import PropTypes from "prop-types";
-import { TiDeleteOutline } from "react-icons/ti";
+import { RiDeleteBin2Line } from "react-icons/ri";
 
 const BlogItem = ({ blogItem, deleteBlog }) => {
   return (
@@ -19,7 +19,7 @@ const BlogItem = ({ blogItem, deleteBlog }) => {
           </div>
           <div className="flex items-center gap-x-2">
             <div>
-              <TiDeleteOutline size={25} onClick={deleteBlog} />
+              <RiDeleteBin2Line  size={20} onClick={deleteBlog} />
             </div>
           </div>
         </div>

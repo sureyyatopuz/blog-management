@@ -72,10 +72,6 @@ const AddNewBlog = ({ handleSubmit }) => {
     });
   };
 
-  
-
-  console.log("blogData",blogData)
-
   return (
     <>
       <form className="blog-form mt-2" onSubmit={onSubmit}>
@@ -84,7 +80,7 @@ const AddNewBlog = ({ handleSubmit }) => {
         ))}
 
         <Button size="md" color="success">
-          Yeni Blog Ekle
+          Blog Ekle
         </Button>
       </form>
       {isShowModal && (

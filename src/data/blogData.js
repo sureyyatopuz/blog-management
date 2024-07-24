@@ -5,7 +5,7 @@ export const blogData = [
     content: "Yapay zeka, birçok sektörde devrim yaratıyor. Sağlık, finans, eğitim gibi alanlarda yapay zeka uygulamaları hızla yayılıyor.",
     author: "Ahmet Yılmaz",
     createDate: "2024-07-01",
-    image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT8ZrXK3YNiB5g7sr0HNwoOAcbFWsKduDmYAbLB4dRLNMWSfvsIrZ8JQzQJpcknQtrLlMU&usqp=CAU",
+    image: "https://via.placeholder.com/150/1E90FF/FFFFFF?text=AI+Media",
   },
   {
     id: 2,

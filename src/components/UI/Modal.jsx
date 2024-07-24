@@ -21,16 +21,10 @@ function Modal({ setIsShowModal, title, desc }) {
         <div className="py-4">{desc}</div>
         <div className="flex justify-end border-t pt-3">
           <button
-            className="bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-700 mr-2"
-            onClick={handleClose}
-          >
-            Cancel
-          </button>
-          <button
             className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700"
             onClick={handleClose}
           >
-            Confirm
+            Ok
           </button>
         </div>
       </div>
