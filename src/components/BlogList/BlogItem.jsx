@@ -8,7 +8,7 @@ const BlogItem = ({ blogItem, deleteBlog }) => {
         <h2 className="text-xl font-bold">{blogItem.title}</h2>
         <img
           src={blogItem.image}
-          alt=""
+          alt={blogItem.title}
           className="w-full h-44 rounded-md object-cover"
         />
         <p className="text-gray-700">{blogItem.content}</p>

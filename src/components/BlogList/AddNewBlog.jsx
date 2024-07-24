@@ -54,7 +54,6 @@ const AddNewBlog = ({ handleSubmit }) => {
 
   const onSubmit = (event) => {
     event.preventDefault();
-
     const isFormValid = Object.values(blogData).every(
       (value) => value.trim() !== ""
     );
@@ -72,6 +71,10 @@ const AddNewBlog = ({ handleSubmit }) => {
       createDate: "",
     });
   };
+
+  
+
+  console.log("blogData",blogData)
 
   return (
     <>
