@@ -1,16 +1,11 @@
-import BlogList from "./components/BlogList/BlogList";
-import "./index.css";
+import _Layout from "./layout/_Layout"
 
 const App = () => {
   return (
     <>
-      <div className="flex justify-center min-h-screen bg-gray-100 p-10">
-        <div className="container">
-          <BlogList/>
-        </div>
-      </div>
+      <_Layout/>
     </>
-  );
-};
+  )
+}
 
-export default App;
+export default App
