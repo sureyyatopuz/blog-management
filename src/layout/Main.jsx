@@ -1,5 +1,7 @@
-import { Image } from "antd";
+import { Button, Card, Image } from "antd";
 import { blogData } from "../data/blogData.js";
+import { GrUpdate } from "react-icons/gr";
+import { TiDeleteOutline } from "react-icons/ti";
 
 const Main = () => {
   return (
@@ -7,7 +9,7 @@ const Main = () => {
       {/* Hero Blog Section */}
       <div className="flex justify-center bg-gray-100 ">
         <div className="flex w-3/4 justify-center bg-gray-100 max-w-full">
-          <div className="flex justify-center bg-slate-500 mt-10 mb-16 max-w-full">
+          <div className="flex justify-center mt-10 mb-16 max-w-full">
             <div className="flex justify-center w-3/5">
               <Image
                 preview={false}
@@ -20,7 +22,7 @@ const Main = () => {
 
             <div className="flex flex-col">
               {blogData.slice(5, 10).map((item, index) => (
-                <div key={index} className="flex bg-red-600 gap-x-4 h-24 ml-4 mb-4" >
+                <div key={index} className="flex gap-x-4 h-24 ml-6 mb-4">
                   <div className=" ">
                     <Image
                       width={100}
@@ -44,16 +46,60 @@ const Main = () => {
 
       {/* Kategoriler / Blogs Section */}
       <div className="flex justify-center mt-10">
-        <div className="flex w-3/4">
-          <h1 className="text-4xl font-semibold">Kategoriler</h1>
-          
+        <div className="flex flex-col w-3/4">
+          <h1 className="text-4xl font-semibold mb-6">Kategoriler</h1>
 
+          {blogData.map((blogItem, index) => (
+            <>
+              <div key={index} className="flex gap-x-6 mb-6">
+                <div className="flex">
+                  <Image
+                    preview={false}
+                    width={290}
+                    src={blogItem.image}
+                    className="rounded-xl object-cover"
+                    height={210}
+                  />
+                </div>
+             
+                  <Card className="flex">
+                    <h4 className="text-2xl font-semibold mb-4">
+                      {blogItem.title}
+                    </h4>
+                    <p className="line-3-clamp mb-5">{blogItem.content}</p>
+                    <div className="flex justify-between">
+                      <div className="flex gap-x-4">
+                        <span>{blogItem.author}</span>
+                        <span>{blogItem.createDate}</span>
+                      </div>
+                      <div className="flex gap-x-4">
+                        <Button
+                          type="primary"
+                          size="small"
+                          icon={<GrUpdate size={11} />}
+                        >
+                          Güncelle
+                        </Button>
+                        <Button
+                          type="primary"
+                          size="small"
+                          icon={<TiDeleteOutline size={14} />}
+                        >
+                          Sil
+                        </Button>
+                      </div>
+                    </div>
+                  </Card>
+         
+              </div>
+            </>
+          ))}
         </div>
       </div>
       {/* Kategoriler / Blogs Section End */}
 
       {/* Blog TV arae */}
-      <div className="flex justify-center bg-gray-900">
+      <div className="flex justify-center bg-gray-900 mt-72">
         <div className="flex w-3/4">
           <h1 className="text-4xl font-semibold text-white">Blog Tv</h1>
         </div>
