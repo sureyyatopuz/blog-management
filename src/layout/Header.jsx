@@ -1,7 +1,14 @@
-import { Button, Input } from "antd";
+import { Input } from "antd";
 import { IoSearch } from "react-icons/io5";
+import AddNewBlog from "../components/AddNewBlog";
+import PropTypes from "prop-types";
 
-const Header = () => {
+
+const Header = ({onSaved}) => {
+
+
+  
+
   return (
     // custom bi tanme container class yaz tailwind te nasıl yazılıyor default ta
     <header className="flex flex-col">
@@ -26,18 +33,17 @@ const Header = () => {
             </div>
             <span>Sıralama DropDown</span>
             <div>
-              <Button
-                type="primary"
-                shape="round"
-              >
-                Blog Ekle
-              </Button>
+              <AddNewBlog onSaved={onSaved}/>
             </div>
           </div>
         </div>
       </div>
     </header>
   );
+};
+
+Header.propTypes = {
+  onSaved: PropTypes.func.isRequired,
 };
 
 export default Header;

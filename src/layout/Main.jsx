@@ -2,8 +2,12 @@ import { Button, Card, Image } from "antd";
 import { blogData } from "../data/blogData.js";
 import { GrUpdate } from "react-icons/gr";
 import { TiDeleteOutline } from "react-icons/ti";
+import PropTypes from "prop-types";
+import { useEffect, useState } from "react";
 
-const Main = () => {
+const Main = ({ newBlog }) => {
+  const [blogs, setBlogs] = useState(blogData);
+
   return (
     <>
       {/* Hero Blog Section */}
@@ -21,7 +25,7 @@ const Main = () => {
             </div>
 
             <div className="flex flex-col">
-              {blogData.slice(5, 10).map((item, index) => (
+              {blogs.slice(5, 10).map((item, index) => (
                 <div key={index} className="flex gap-x-4 h-24 ml-6 mb-4">
                   <div className=" ">
                     <Image
@@ -49,7 +53,7 @@ const Main = () => {
         <div className="flex flex-col w-3/4">
           <h1 className="text-4xl font-semibold mb-6">Kategoriler</h1>
 
-          {blogData.map((blogItem, index) => (
+          {blogs.map((blogItem, index) => (
             <>
               <div key={index} className="flex gap-x-6 mb-6">
                 <div className="flex">
@@ -61,36 +65,35 @@ const Main = () => {
                     height={210}
                   />
                 </div>
-             
-                  <Card className="flex">
-                    <h4 className="text-2xl font-semibold mb-4">
-                      {blogItem.title}
-                    </h4>
-                    <p className="line-3-clamp mb-5">{blogItem.content}</p>
-                    <div className="flex justify-between">
-                      <div className="flex gap-x-4">
-                        <span>{blogItem.author}</span>
-                        <span>{blogItem.createDate}</span>
-                      </div>
-                      <div className="flex gap-x-4">
-                        <Button
-                          type="primary"
-                          size="small"
-                          icon={<GrUpdate size={11} />}
-                        >
-                          Güncelle
-                        </Button>
-                        <Button
-                          type="primary"
-                          size="small"
-                          icon={<TiDeleteOutline size={14} />}
-                        >
-                          Sil
-                        </Button>
-                      </div>
+
+                <Card className="flex">
+                  <h4 className="text-2xl font-semibold mb-4">
+                    {blogItem.title}
+                  </h4>
+                  <p className="line-3-clamp mb-5">{blogItem.content}</p>
+                  <div className="flex justify-between">
+                    <div className="flex gap-x-4">
+                      <span>{blogItem.author}</span>
+                      <span>{blogItem.createDate}</span>
                     </div>
-                  </Card>
-         
+                    <div className="flex gap-x-4">
+                      <Button
+                        type="primary"
+                        size="small"
+                        icon={<GrUpdate size={11} />}
+                      >
+                        Güncelle
+                      </Button>
+                      <Button
+                        type="primary"
+                        size="small"
+                        icon={<TiDeleteOutline size={14} />}
+                      >
+                        Sil
+                      </Button>
+                    </div>
+                  </div>
+                </Card>
               </div>
             </>
           ))}
@@ -107,6 +110,10 @@ const Main = () => {
       {/* Kategoriler / Blogs Section End */}
     </>
   );
+};
+
+Main.propTypes = {
+  newBlog: PropTypes.array.isRequired,
 };
 
 export default Main;
