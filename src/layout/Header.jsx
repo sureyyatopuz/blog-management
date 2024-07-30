@@ -1,4 +1,4 @@
-import { Input } from "antd";
+import { Button, Input } from "antd";
 import { IoSearch } from "react-icons/io5";
 
 const Header = () => {
@@ -25,7 +25,14 @@ const Header = () => {
               />
             </div>
             <span>Sıralama DropDown</span>
-            <span>Blog Ekle</span>
+            <div>
+              <Button
+                type="primary"
+                shape="round"
+              >
+                Blog Ekle
+              </Button>
+            </div>
           </div>
         </div>
       </div>
