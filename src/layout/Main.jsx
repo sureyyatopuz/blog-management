@@ -1,10 +1,15 @@
-import { Button, Card, Image } from "antd";
+import { Button, Card, Image, message, Popconfirm } from "antd";
 import { GrUpdate } from "react-icons/gr";
 import { TiDeleteOutline } from "react-icons/ti";
 import PropTypes from "prop-types";
 import dayjs from "dayjs";
 
-const Main = ({ blogData }) => {
+const Main = ({ blogData, onDelete }) => {
+
+  const confirm = (id) => {
+    onDelete(id);
+    message.success('Blog Silindi.');
+  };
 
   return (
     <>
@@ -72,7 +77,9 @@ const Main = ({ blogData }) => {
                   <div className="flex justify-between">
                     <div className="flex gap-x-4">
                       <span>{blogItem.author}</span>
-                      <span>{dayjs(blogItem.createDate).format("DD/MM/YYYY")}</span>
+                      <span>
+                        {dayjs(blogItem.createDate).format("DD/MM/YYYY")}
+                      </span>
                     </div>
                     <div className="flex gap-x-4">
                       <Button
@@ -82,13 +89,20 @@ const Main = ({ blogData }) => {
                       >
                         Güncelle
                       </Button>
-                      <Button
-                        type="primary"
+
+                      <Popconfirm
+                        title="Bloğu Sil"
+                        description="Silmek istediğinizden emin misiniz?"
+                        onConfirm={() => confirm(blogItem.id)}
+                        okText="Evet"
+                        cancelText="Hayır"
+                      >
+                        <Button 
+                        danger
                         size="small"
                         icon={<TiDeleteOutline size={14} />}
-                      >
-                        Sil
-                      </Button>
+                        >Sil</Button>
+                      </Popconfirm>
                     </div>
                   </div>
                 </Card>
@@ -111,7 +125,8 @@ const Main = ({ blogData }) => {
 };
 
 Main.propTypes = {
-  blogData: PropTypes.array.isRequired
+  blogData: PropTypes.array.isRequired,
+  onDelete: PropTypes.func.isRequired,
 };
 
 export default Main;

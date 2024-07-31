@@ -20,11 +20,17 @@ const _Layout = () => {
 
     setBlogs(updatedBlogs);
   };
+
+  const handleDeleteBlog = (id) => {
+    const updatedBlogs = blogs.filter(blog => blog.id !== id);
+    setBlogs(updatedBlogs);
+  };
+
   return (
     <>
       <div>
         <Header onSaved={handleCreateBlog} />
-        <Main blogData={blogs} />
+        <Main blogData={blogs} onDelete={handleDeleteBlog}/>
         <Footer />
       </div>
     </>
