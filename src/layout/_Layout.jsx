@@ -2,19 +2,20 @@ import { useState } from "react";
 import Footer from "./Footer";
 import Header from "./Header";
 import Main from "./Main";
+import { blogData } from "../data/blogData.js";
 
 const _Layout = () => {
-  const [blogs, setBlogs] = useState([]);
+  const [blogs, setBlogs] = useState(blogData);
 
   const handleCreateBlog = (blog) => {
     setBlogs([...blogs, blog]);
-    console.log('New blog saved: Layouta taşınan BlogItem', blog);
+
   };
   return (
     <>
       <div>
         <Header onSaved={handleCreateBlog} />
-        <Main newBlog={blogs} />
+        <Main blogData={blogs} />
         <Footer />
       </div>
     </>

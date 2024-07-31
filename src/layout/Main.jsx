@@ -1,12 +1,10 @@
 import { Button, Card, Image } from "antd";
-import { blogData } from "../data/blogData.js";
 import { GrUpdate } from "react-icons/gr";
 import { TiDeleteOutline } from "react-icons/ti";
 import PropTypes from "prop-types";
-import { useEffect, useState } from "react";
+import dayjs from "dayjs";
 
-const Main = ({ newBlog }) => {
-  const [blogs, setBlogs] = useState(blogData);
+const Main = ({ blogData }) => {
 
   return (
     <>
@@ -25,7 +23,7 @@ const Main = ({ newBlog }) => {
             </div>
 
             <div className="flex flex-col">
-              {blogs.slice(5, 10).map((item, index) => (
+              {blogData.slice(5, 10).map((item, index) => (
                 <div key={index} className="flex gap-x-4 h-24 ml-6 mb-4">
                   <div className=" ">
                     <Image
@@ -53,7 +51,7 @@ const Main = ({ newBlog }) => {
         <div className="flex flex-col w-3/4">
           <h1 className="text-4xl font-semibold mb-6">Kategoriler</h1>
 
-          {blogs.map((blogItem, index) => (
+          {blogData.map((blogItem, index) => (
             <>
               <div key={index} className="flex gap-x-6 mb-6">
                 <div className="flex">
@@ -74,7 +72,7 @@ const Main = ({ newBlog }) => {
                   <div className="flex justify-between">
                     <div className="flex gap-x-4">
                       <span>{blogItem.author}</span>
-                      <span>{blogItem.createDate}</span>
+                      <span>{dayjs(blogItem.createDate).format("DD/MM/YYYY")}</span>
                     </div>
                     <div className="flex gap-x-4">
                       <Button
@@ -113,7 +111,7 @@ const Main = ({ newBlog }) => {
 };
 
 Main.propTypes = {
-  newBlog: PropTypes.array.isRequired,
+  blogData: PropTypes.array.isRequired
 };
 
 export default Main;

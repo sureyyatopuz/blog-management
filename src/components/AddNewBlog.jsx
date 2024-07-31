@@ -12,6 +12,7 @@ import {
   Space,
 } from "antd";
 import PropTypes from "prop-types";
+import dayjs from "dayjs";
 
 const { Option } = Select;
 
@@ -58,7 +59,15 @@ const AddNewBlog = ({ onSaved }) => {
       >
         <Form form={form} layout="vertical" onFinish={onFinish}>
           <Row gutter={16}>
+
             <Col span={12}>
+            <Form.Item
+                name="id"
+                initialValue={22}
+                hidden={true}
+              >
+              <Input/>
+              </Form.Item>
               <Form.Item
                 name="category"
                 label="Kategori"
@@ -153,7 +162,7 @@ const AddNewBlog = ({ onSaved }) => {
                   },
                 ]}
               >
-                <DatePicker className="w-full" />
+                <DatePicker format={"DD/MM/YYYY"} onChange={(e) => {form.setFieldsValue({createDate: dayjs(e)})}} className="w-full" />
               </Form.Item>
             </Col>
           </Row>
