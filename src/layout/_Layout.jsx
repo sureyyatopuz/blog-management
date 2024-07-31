@@ -5,11 +5,20 @@ import Main from "./Main";
 import { blogData } from "../data/blogData.js";
 
 const _Layout = () => {
-  const [blogs, setBlogs] = useState(blogData);
+  const [blogs, setBlogs] = useState(
+    blogData.map((blog, index) => ({ ...blog, id: index + 1 }))
+  );
 
   const handleCreateBlog = (blog) => {
-    setBlogs([...blogs, blog]);
 
+    const newBlog = { ...blog, id: blogs.length + 1 };
+
+    const updatedBlogs = [...blogs, newBlog].map((blog, index) => ({
+      ...blog,
+      id: index + 1,
+    }));
+
+    setBlogs(updatedBlogs);
   };
   return (
     <>

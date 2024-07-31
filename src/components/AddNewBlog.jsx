@@ -13,6 +13,7 @@ import {
 } from "antd";
 import PropTypes from "prop-types";
 import dayjs from "dayjs";
+import { toast } from "react-toastify";
 
 const { Option } = Select;
 
@@ -29,8 +30,9 @@ const AddNewBlog = ({ onSaved }) => {
   };
 
   const onFinish = (values) => {
-    console.log("Form values: Add new blog taki data ", values);
     onSaved(values);
+    toast.success("Yeni Blog Eklendi")
+    setOpen(false)
   };
 
   return (
