@@ -1,14 +1,32 @@
-import { Button, Card, Image, message, Popconfirm } from "antd";
+import { Button, Card, DatePicker, Form, Image, Input, message, Modal, Popconfirm, Space } from "antd";
 import { GrUpdate } from "react-icons/gr";
 import { TiDeleteOutline } from "react-icons/ti";
 import PropTypes from "prop-types";
 import dayjs from "dayjs";
+import { useState } from "react";
 
 const Main = ({ blogData, onDelete }) => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [formUpdate] = Form.useForm();
 
   const confirm = (id) => {
     onDelete(id);
-    message.success('Blog Silindi.');
+    message.success("Blog Silindi.");
+  };
+
+  const handleUpdate = (blogItem) => {
+    console.log('blogItemasda   sdasdsad', blogItem)
+    formUpdate.resetFields();
+    setIsModalOpen(true);
+    formUpdate.setFieldsValue({
+      title: blogItem.title,
+      content: blogItem.content,
+      author: blogItem.author,
+      createDate: blogItem.createDate,
+      image: blogItem.image,
+      categoryId: blogItem.categoryId,
+      categoryName: blogItem.categoryName
+    })
   };
 
   return (
@@ -86,6 +104,7 @@ const Main = ({ blogData, onDelete }) => {
                         type="primary"
                         size="small"
                         icon={<GrUpdate size={11} />}
+                        onClick={() => handleUpdate(blogItem)}
                       >
                         Güncelle
                       </Button>
@@ -97,11 +116,13 @@ const Main = ({ blogData, onDelete }) => {
                         okText="Evet"
                         cancelText="Hayır"
                       >
-                        <Button 
-                        danger
-                        size="small"
-                        icon={<TiDeleteOutline size={14} />}
-                        >Sil</Button>
+                        <Button
+                          danger
+                          size="small"
+                          icon={<TiDeleteOutline size={14} />}
+                        >
+                          Sil
+                        </Button>
                       </Popconfirm>
                     </div>
                   </div>
@@ -119,14 +140,109 @@ const Main = ({ blogData, onDelete }) => {
           <h1 className="text-4xl font-semibold text-white">Blog Tv</h1>
         </div>
       </div>
-      {/* Kategoriler / Blogs Section End */}
+      {/* Blog TV End */}
+
+      <Modal
+        title="Blog Düzenle"
+        open={isModalOpen}
+        onCancel={() => setIsModalOpen(false)}
+      >
+        <Form form={formUpdate} className="my-4" >
+          <Form.Item name="id" hidden={true}>
+            <Input />
+          </Form.Item>
+
+          <Form.Item
+            labelAlign="left"
+            labelCol={{ span: 8 }}
+            className="w-full"
+            label="Belge No"
+            name="title"
+            rules={[{ required: true, message: "Bu alan boş bırakılamaz!" }]}
+          >
+            <Input />
+          </Form.Item>
+          <Form.Item
+            labelAlign="left"
+            labelCol={{ span: 8 }}
+            className="w-full"
+            label="Belge Türü"
+            name="content"
+            rules={[
+              { required: true, message: "Bu alan boş bırakılamaz!" },
+            ]}
+          >
+            <Input />
+          </Form.Item>
+          <Form.Item
+            labelAlign="left"
+            labelCol={{ span: 8 }}
+            className="w-full"
+            label="Düzenleyen"
+            name="author"
+            rules={[{ required: true, message: "Bu alan boş bırakılamaz!" }]}
+          >
+            <Input />
+          </Form.Item>
+          <Form.Item
+            labelAlign="left"
+            labelCol={{ span: 8 }}
+            className="w-full"
+            label="Verildiği Yer"
+            name="image"
+            rules={[{ required: true, message: "Bu alan boş bırakılamaz!" }]}
+          >
+            <Input />
+          </Form.Item>
+          <Form.Item
+            labelAlign="left"
+            labelCol={{ span: 8 }}
+            className="w-full"
+            label="Verilme Tarihi"
+            name="categoryId"
+            rules={[{ required: true, message: "Bu alan boş bırakılamaz!" }]}
+          >
+            <Space className="w-full" direction="vertical">
+              <DatePicker
+                // defaultValue={formUpdate.getFieldValue("dateOfIssue")}
+                // onChange={(e) => {
+                //   formUpdate.setFieldsValue({ dateOfIssue: dateFormat(e) });
+                // }}
+                format={"DD/MM/YYYY"}
+                className="w-full"
+                placeholder="Verilme Tarihi"
+              />
+            </Space>
+          </Form.Item>
+          <Form.Item
+            labelAlign="left"
+            labelCol={{ span: 8 }}
+            className="w-full"
+            label="Geçerlilik Süresi"
+            name="createDate"
+            rules={[{ required: true, message: "Bu alan boş bırakılamaz!" }]}
+          >
+            <Space className="w-full" direction="vertical">
+              <DatePicker
+                // defaultValue={formUpdate.getFieldValue("dateOfExpiry")}
+                // onChange={(e) => {
+                //   formUpdate.setFieldsValue({ dateOfExpiry: dateFormat(e) });
+                // }}
+                format={"DD/MM/YYYY"}
+                className="w-full"
+                placeholder="Geçerlilik Süresi"
+              />
+            </Space>
+          </Form.Item>
+        </Form>
+      </Modal>
     </>
   );
 };
 
 Main.propTypes = {
   blogData: PropTypes.array.isRequired,
-  onDelete: PropTypes.func.isRequired,
+  onDelete: PropTypes.func.isRequired
 };
 
 export default Main;
