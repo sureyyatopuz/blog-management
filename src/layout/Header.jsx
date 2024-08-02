@@ -11,7 +11,7 @@ const Header = ({onSaved}) => {
 
   return (
     // custom bi tanme container class yaz tailwind te nasıl yazılıyor default ta
-    <header className="flex flex-col">
+    <header className="flex flex-col container mx-auto">
       <div className="flex h-16 bg-gray-100 justify-center items-center">
         Blog Tech
       </div>

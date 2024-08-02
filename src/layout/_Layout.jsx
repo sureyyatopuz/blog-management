@@ -29,6 +29,7 @@ const _Layout = () => {
   return (
     <>
       <div>
+        {/* containerı uygulamak için container mx-auto    menunun  sabit olması için için sticky top class larını ver*/}  
         <Header onSaved={handleCreateBlog} />
         <Main blogData={blogs} onDelete={handleDeleteBlog}/>
         <Footer />
