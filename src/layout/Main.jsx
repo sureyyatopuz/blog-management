@@ -1,4 +1,15 @@
-import { Button, Card, DatePicker, Form, Image, Input, message, Modal, Popconfirm, Space } from "antd";
+import {
+  Button,
+  Card,
+  DatePicker,
+  Form,
+  Image,
+  Input,
+  message,
+  Modal,
+  Popconfirm,
+  Space,
+} from "antd";
 import { GrUpdate } from "react-icons/gr";
 import { TiDeleteOutline } from "react-icons/ti";
 import PropTypes from "prop-types";
@@ -15,20 +26,23 @@ const Main = ({ blogData, onDelete }) => {
   };
 
   const handleUpdate = (blogItem) => {
-    console.log('blogItemasda   sdasdsad', blogItem)
     formUpdate.resetFields();
     setIsModalOpen(true);
     formUpdate.setFieldsValue({
+      id: blogItem.id,
       title: blogItem.title,
       content: blogItem.content,
       author: blogItem.author,
-      createDate: blogItem.createDate,
+      createDate: dayjs(blogItem.createDate),
       image: blogItem.image,
       categoryId: blogItem.categoryId,
-      categoryName: blogItem.categoryName
-    })
+      categoryName: blogItem.categoryName,
+    });
   };
 
+  const onFinish = (values) => {
+    console.log('Submit value categorler var mı ', values)
+  };
   return (
     <>
       {/* Hero Blog Section */}
@@ -75,60 +89,58 @@ const Main = ({ blogData, onDelete }) => {
           <h1 className="text-4xl font-semibold mb-6">Kategoriler</h1>
 
           {blogData.map((blogItem, index) => (
-            <>
-              <div key={index} className="flex gap-x-6 mb-6">
-                <div className="flex">
-                  <Image
-                    preview={false}
-                    width={290}
-                    src={blogItem.image}
-                    className="rounded-xl object-cover"
-                    height={210}
-                  />
-                </div>
-
-                <Card className="flex">
-                  <h4 className="text-2xl font-semibold mb-4">
-                    {blogItem.title}
-                  </h4>
-                  <p className="line-3-clamp mb-5">{blogItem.content}</p>
-                  <div className="flex justify-between">
-                    <div className="flex gap-x-4">
-                      <span>{blogItem.author}</span>
-                      <span>
-                        {dayjs(blogItem.createDate).format("DD/MM/YYYY")}
-                      </span>
-                    </div>
-                    <div className="flex gap-x-4">
-                      <Button
-                        type="primary"
-                        size="small"
-                        icon={<GrUpdate size={11} />}
-                        onClick={() => handleUpdate(blogItem)}
-                      >
-                        Güncelle
-                      </Button>
-
-                      <Popconfirm
-                        title="Bloğu Sil"
-                        description="Silmek istediğinizden emin misiniz?"
-                        onConfirm={() => confirm(blogItem.id)}
-                        okText="Evet"
-                        cancelText="Hayır"
-                      >
-                        <Button
-                          danger
-                          size="small"
-                          icon={<TiDeleteOutline size={14} />}
-                        >
-                          Sil
-                        </Button>
-                      </Popconfirm>
-                    </div>
-                  </div>
-                </Card>
+            <div key={index} className="flex gap-x-6 mb-6">
+              <div className="flex">
+                <Image
+                  preview={false}
+                  width={290}
+                  src={blogItem.image}
+                  className="rounded-xl object-cover"
+                  height={210}
+                />
               </div>
-            </>
+
+              <Card className="flex">
+                <h4 className="text-2xl font-semibold mb-4">
+                  {blogItem.title}
+                </h4>
+                <p className="line-3-clamp mb-5">{blogItem.content}</p>
+                <div className="flex justify-between">
+                  <div className="flex gap-x-4">
+                    <span>{blogItem.author}</span>
+                    <span>
+                      {dayjs(blogItem.createDate).format("DD/MM/YYYY")}
+                    </span>
+                  </div>
+                  <div className="flex gap-x-4">
+                    <Button
+                      type="primary"
+                      size="small"
+                      icon={<GrUpdate size={11} />}
+                      onClick={() => handleUpdate(blogItem)}
+                    >
+                      Güncelle
+                    </Button>
+
+                    <Popconfirm
+                      title="Bloğu Sil"
+                      description="Silmek istediğinizden emin misiniz?"
+                      onConfirm={() => confirm(blogItem.id)}
+                      okText="Evet"
+                      cancelText="Hayır"
+                    >
+                      <Button
+                        danger
+                        size="small"
+                        icon={<TiDeleteOutline size={14} />}
+                      >
+                        Sil
+                      </Button>
+                    </Popconfirm>
+                  </div>
+                </div>
+              </Card>
+            </div>
           ))}
         </div>
       </div>
@@ -145,10 +157,19 @@ const Main = ({ blogData, onDelete }) => {
       <Modal
         title="Blog Düzenle"
         open={isModalOpen}
+        okText="Güncelle"
+        cancelButtonProps={{ style: { display: "none" } }}
         onCancel={() => setIsModalOpen(false)}
+        onOk={() => formUpdate.submit()} // Güncelle butonuna basıldığında form submit edilir
       >
-        <Form form={formUpdate} className="my-4" >
+        <Form form={formUpdate} onFinish={onFinish} className="my-4">
           <Form.Item name="id" hidden={true}>
+            <Input />
+          </Form.Item>
+          <Form.Item name="categoryId" hidden={true}>
+            <Input />
+          </Form.Item>
+          <Form.Item name="categoryName" hidden={true}>
             <Input />
           </Form.Item>
 
@@ -156,7 +177,7 @@ const Main = ({ blogData, onDelete }) => {
             labelAlign="left"
             labelCol={{ span: 8 }}
             className="w-full"
-            label="Belge No"
+            label="Başlık"
             name="title"
             rules={[{ required: true, message: "Bu alan boş bırakılamaz!" }]}
           >
@@ -166,11 +187,9 @@ const Main = ({ blogData, onDelete }) => {
             labelAlign="left"
             labelCol={{ span: 8 }}
             className="w-full"
-            label="Belge Türü"
+            label="İçerik"
             name="content"
-            rules={[
-              { required: true, message: "Bu alan boş bırakılamaz!" },
-            ]}
+            rules={[{ required: true, message: "Bu alan boş bırakılamaz!" }]}
           >
             <Input />
           </Form.Item>
@@ -178,7 +197,7 @@ const Main = ({ blogData, onDelete }) => {
             labelAlign="left"
             labelCol={{ span: 8 }}
             className="w-full"
-            label="Düzenleyen"
+            label="Yazar"
             name="author"
             rules={[{ required: true, message: "Bu alan boş bırakılamaz!" }]}
           >
@@ -188,7 +207,7 @@ const Main = ({ blogData, onDelete }) => {
             labelAlign="left"
             labelCol={{ span: 8 }}
             className="w-full"
-            label="Verildiği Yer"
+            label="Resim"
             name="image"
             rules={[{ required: true, message: "Bu alan boş bırakılamaz!" }]}
           >
@@ -198,39 +217,19 @@ const Main = ({ blogData, onDelete }) => {
             labelAlign="left"
             labelCol={{ span: 8 }}
             className="w-full"
-            label="Verilme Tarihi"
-            name="categoryId"
-            rules={[{ required: true, message: "Bu alan boş bırakılamaz!" }]}
-          >
-            <Space className="w-full" direction="vertical">
-              <DatePicker
-                // defaultValue={formUpdate.getFieldValue("dateOfIssue")}
-                // onChange={(e) => {
-                //   formUpdate.setFieldsValue({ dateOfIssue: dateFormat(e) });
-                // }}
-                format={"DD/MM/YYYY"}
-                className="w-full"
-                placeholder="Verilme Tarihi"
-              />
-            </Space>
-          </Form.Item>
-          <Form.Item
-            labelAlign="left"
-            labelCol={{ span: 8 }}
-            className="w-full"
-            label="Geçerlilik Süresi"
+            label="Oluşturma Tarihi"
             name="createDate"
             rules={[{ required: true, message: "Bu alan boş bırakılamaz!" }]}
           >
             <Space className="w-full" direction="vertical">
               <DatePicker
-                // defaultValue={formUpdate.getFieldValue("dateOfExpiry")}
-                // onChange={(e) => {
-                //   formUpdate.setFieldsValue({ dateOfExpiry: dateFormat(e) });
-                // }}
+                value={formUpdate.getFieldValue("createDate")}
                 format={"DD/MM/YYYY"}
                 className="w-full"
-                placeholder="Geçerlilik Süresi"
+                placeholder="Oluşturma Tarihi"
+                onChange={(date) =>
+                  formUpdate.setFieldValue("createDate", date)
+                }
               />
             </Space>
           </Form.Item>
@@ -242,7 +241,7 @@ const Main = ({ blogData, onDelete }) => {
 
 Main.propTypes = {
   blogData: PropTypes.array.isRequired,
-  onDelete: PropTypes.func.isRequired
+  onDelete: PropTypes.func.isRequired,
 };
 
 export default Main;
