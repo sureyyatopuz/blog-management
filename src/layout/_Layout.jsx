@@ -1,5 +1,5 @@
 import { useState } from "react";
-import Footer from "./Footer";
+// import Footer from "./Footer";
 import Header from "./Header";
 import Main from "./Main";
 import { blogData } from "../data/blogData.js";
@@ -8,6 +8,7 @@ const _Layout = () => {
   const [blogs, setBlogs] = useState(
     blogData.map((blog, index) => ({ ...blog, id: index + 1 }))
   );
+  const [searchTerm, setSearchTerm] = useState("");
 
   const handleCreateBlog = (blog) => {
 
@@ -26,13 +27,25 @@ const _Layout = () => {
     setBlogs(updatedBlogs);
   };
 
+  const handleUpdateBlog = (updatedBlog) => {
+    const updatedBlogs = blogs.map((blog) =>
+      blog.id === updatedBlog.id ? updatedBlog : blog
+    );
+  
+    setBlogs(updatedBlogs);
+  };
+
+  const handleSearch = (term) => {
+    setSearchTerm(term);
+  };
+
   return (
     <>
       <div>
         {/* containerı uygulamak için container mx-auto    menunun  sabit olması için için sticky top class larını ver*/}  
-        <Header onSaved={handleCreateBlog} />
-        <Main blogData={blogs} onDelete={handleDeleteBlog}/>
-        <Footer />
+        <Header onSaved={handleCreateBlog} onSearch={handleSearch} />
+        <Main blogData={blogs} onDelete={handleDeleteBlog} onUpdate={handleUpdateBlog} searchTerm={searchTerm} />
+        {/* <Footer /> */}
       </div>
     </>
   );

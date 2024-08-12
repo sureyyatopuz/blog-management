@@ -8,7 +8,6 @@ import {
   message,
   Modal,
   Popconfirm,
-  Space,
 } from "antd";
 import { GrUpdate } from "react-icons/gr";
 import { TiDeleteOutline } from "react-icons/ti";
@@ -16,9 +15,15 @@ import PropTypes from "prop-types";
 import dayjs from "dayjs";
 import { useState } from "react";
 
-const Main = ({ blogData, onDelete }) => {
+const Main = ({ blogData, onDelete, onUpdate, searchTerm  }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [formUpdate] = Form.useForm();
+
+  const filteredBlogs = blogData.filter((blog) =>
+    blog.title.toLowerCase().includes(searchTerm.toLowerCase()) || // Başlıkta arama
+    blog.content.toLowerCase().includes(searchTerm.toLowerCase()) ||  // İçerikte arama
+    blog.author.toLowerCase().includes(searchTerm.toLowerCase())
+  );
 
   const confirm = (id) => {
     onDelete(id);
@@ -41,8 +46,13 @@ const Main = ({ blogData, onDelete }) => {
   };
 
   const onFinish = (values) => {
-    console.log('Submit value categorler var mı ', values)
+
+    onUpdate(values);
+
+    setIsModalOpen(false);
+    message.success("Blog başarıyla güncellendi.");
   };
+
   return (
     <>
       {/* Hero Blog Section */}
@@ -88,7 +98,7 @@ const Main = ({ blogData, onDelete }) => {
         <div className="flex flex-col w-3/4">
           <h1 className="text-4xl font-semibold mb-6">Kategoriler</h1>
 
-          {blogData.map((blogItem, index) => (
+          {filteredBlogs.map((blogItem, index) => (
             <div key={index} className="flex gap-x-6 mb-6">
               <div className="flex">
                 <Image
@@ -146,12 +156,12 @@ const Main = ({ blogData, onDelete }) => {
       </div>
       {/* Kategoriler / Blogs Section End */}
 
-      {/* Blog TV arae */}
-      <div className="flex justify-center bg-gray-900 mt-72">
+      {/* Blog TV area */}
+      {/* <div className="flex justify-center bg-gray-900 mt-72">
         <div className="flex w-3/4">
           <h1 className="text-4xl font-semibold text-white">Blog Tv</h1>
         </div>
-      </div>
+      </div> */}
       {/* Blog TV End */}
 
       <Modal
@@ -221,7 +231,7 @@ const Main = ({ blogData, onDelete }) => {
             name="createDate"
             rules={[{ required: true, message: "Bu alan boş bırakılamaz!" }]}
           >
-            <Space className="w-full" direction="vertical">
+         
               <DatePicker
                 value={formUpdate.getFieldValue("createDate")}
                 format={"DD/MM/YYYY"}
@@ -231,7 +241,7 @@ const Main = ({ blogData, onDelete }) => {
                   formUpdate.setFieldValue("createDate", date)
                 }
               />
-            </Space>
+       
           </Form.Item>
         </Form>
       </Modal>
@@ -242,6 +252,8 @@ const Main = ({ blogData, onDelete }) => {
 Main.propTypes = {
   blogData: PropTypes.array.isRequired,
   onDelete: PropTypes.func.isRequired,
+  onUpdate: PropTypes.func.isRequired,
+  searchTerm: PropTypes.string.isRequired, 
 };
 
 export default Main;

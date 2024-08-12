@@ -2,13 +2,17 @@ import { Input } from "antd";
 import { IoSearch } from "react-icons/io5";
 import AddNewBlog from "../components/AddNewBlog";
 import PropTypes from "prop-types";
+import { useState } from "react";
 
 
-const Header = ({onSaved}) => {
+const Header = ({ onSaved, onSearch }) => {
+  const [searchTerm, setSearchTerm] = useState("");
 
-
+  const handleSearchChange = (e) => {
+    setSearchTerm(e.target.value);
+    onSearch(e.target.value); // Arama terimini üst bileşene iletin
+  };
   
-
   return (
     // custom bi tanme container class yaz tailwind te nasıl yazılıyor default ta
     <header className="flex flex-col">
@@ -25,10 +29,12 @@ const Header = ({onSaved}) => {
           </div>
           <div className="flex gap-x-4 items-center">
             <div>
-              <Input
+            <Input
                 className="rounded-full"
                 placeholder="Ara"
                 prefix={<IoSearch />}
+                value={searchTerm}
+                onChange={handleSearchChange} 
               />
             </div>
             <span>Sıralama DropDown</span>
@@ -44,6 +50,7 @@ const Header = ({onSaved}) => {
 
 Header.propTypes = {
   onSaved: PropTypes.func.isRequired,
+  onSearch: PropTypes.func.isRequired,
 };
 
 export default Header;
