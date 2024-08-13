@@ -1,20 +1,23 @@
-import { Input } from "antd";
+import { Input, Select } from "antd";
 import { IoSearch } from "react-icons/io5";
 import AddNewBlog from "../components/AddNewBlog";
 import PropTypes from "prop-types";
 import { useState } from "react";
 
-
-const Header = ({ onSaved, onSearch }) => {
+const Header = ({ onSaved, onSearch, onSort }) => {
   const [searchTerm, setSearchTerm] = useState("");
 
   const handleSearchChange = (e) => {
     setSearchTerm(e.target.value);
-    onSearch(e.target.value); // Arama terimini üst bileşene iletin
+    onSearch(e.target.value); 
   };
-  
+
+  const handleSortChange = (value) => {
+    onSort(value); 
+  };
+
   return (
-    // custom bi tanme container class yaz tailwind te nasıl yazılıyor default ta
+  
     <header className="flex flex-col">
       <div className="flex h-16 bg-gray-100 justify-center items-center">
         Blog Tech
@@ -29,17 +32,35 @@ const Header = ({ onSaved, onSearch }) => {
           </div>
           <div className="flex gap-x-4 items-center">
             <div>
-            <Input
+              <Input
                 className="rounded-full"
                 placeholder="Ara"
                 prefix={<IoSearch />}
                 value={searchTerm}
-                onChange={handleSearchChange} 
+                onChange={handleSearchChange}
               />
             </div>
-            <span>Sıralama DropDown</span>
             <div>
-              <AddNewBlog onSaved={onSaved}/>
+              <Select
+                style={{
+                  width: 120,
+                }}
+                onChange={handleSortChange}
+                options={[
+                  {
+                    value: "author",
+                    label: "Yazar",
+                  },
+                  {
+                    value: "createDate",
+                    label: "Tarih",
+                  },
+                ]}
+                placeholder="Sırala"
+              />
+            </div>
+            <div>
+              <AddNewBlog onSaved={onSaved} />
             </div>
           </div>
         </div>
@@ -51,6 +72,7 @@ const Header = ({ onSaved, onSearch }) => {
 Header.propTypes = {
   onSaved: PropTypes.func.isRequired,
   onSearch: PropTypes.func.isRequired,
+  onSort: PropTypes.func.isRequired, 
 };
 
 export default Header;

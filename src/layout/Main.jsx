@@ -20,8 +20,8 @@ const Main = ({ blogData, onDelete, onUpdate, searchTerm  }) => {
   const [formUpdate] = Form.useForm();
 
   const filteredBlogs = blogData.filter((blog) =>
-    blog.title.toLowerCase().includes(searchTerm.toLowerCase()) || // Başlıkta arama
-    blog.content.toLowerCase().includes(searchTerm.toLowerCase()) ||  // İçerikte arama
+    blog.title.toLowerCase().includes(searchTerm.toLowerCase()) || 
+    blog.content.toLowerCase().includes(searchTerm.toLowerCase()) || 
     blog.author.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
@@ -75,7 +75,7 @@ const Main = ({ blogData, onDelete, onUpdate, searchTerm  }) => {
                   <div className=" ">
                     <Image
                       width={100}
-                      src="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
+                      src={item.image}
                       className=" rounded-lg"
                     />
                   </div>

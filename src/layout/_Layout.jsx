@@ -3,6 +3,7 @@ import { useState } from "react";
 import Header from "./Header";
 import Main from "./Main";
 import { blogData } from "../data/blogData.js";
+import dayjs from "dayjs";
 
 const _Layout = () => {
   const [blogs, setBlogs] = useState(
@@ -39,11 +40,20 @@ const _Layout = () => {
     setSearchTerm(term);
   };
 
+  const handleSort = (sortType) => {
+    const sortedBlogs = [...blogs];
+    if (sortType === "createDate") {
+      sortedBlogs.sort((a, b) => dayjs(b.createDate).diff(dayjs(a.createDate)));
+    } else if (sortType === "author") {
+      sortedBlogs.sort((a, b) => a.author.localeCompare(b.author));
+    }
+    setBlogs(sortedBlogs);
+  };
+
   return (
     <>
       <div>
-        {/* containerı uygulamak için container mx-auto    menunun  sabit olması için için sticky top class larını ver*/}  
-        <Header onSaved={handleCreateBlog} onSearch={handleSearch} />
+        <Header onSaved={handleCreateBlog} onSearch={handleSearch} onSort={handleSort} />
         <Main blogData={blogs} onDelete={handleDeleteBlog} onUpdate={handleUpdateBlog} searchTerm={searchTerm} />
         {/* <Footer /> */}
       </div>
