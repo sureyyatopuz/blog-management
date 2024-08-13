@@ -124,10 +124,11 @@ const Main = ({ blogData, onDelete, onUpdate, searchTerm  }) => {
                   </div>
                   <div className="flex gap-x-4">
                     <Button
-                      type="primary"
+                      className="bg-blue-500 text-white"
                       size="small"
                       icon={<GrUpdate size={11} />}
                       onClick={() => handleUpdate(blogItem)}
+
                     >
                       Güncelle
                     </Button>
@@ -140,7 +141,7 @@ const Main = ({ blogData, onDelete, onUpdate, searchTerm  }) => {
                       cancelText="Hayır"
                     >
                       <Button
-                        danger
+                        className="bg-blue-500 text-white"
                         size="small"
                         icon={<TiDeleteOutline size={14} />}
                       >

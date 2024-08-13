@@ -37,7 +37,7 @@ const AddNewBlog = ({ onSaved }) => {
 
   return (
     <>
-      <Button type="primary" onClick={showDrawer} icon={<PlusOutlined />}>
+      <Button  onClick={showDrawer} icon={<PlusOutlined /> } className="bg-blue-500 text-white">
         Blog Ekle
       </Button>
       <Drawer
