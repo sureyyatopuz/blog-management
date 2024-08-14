@@ -1,4 +1,11 @@
-import myImage from '../../public/AI.png';
+import ai from '../../public/images/AI.png';
+import SoftwareEngineer from '../../public/images/SoftwareEngineer.png';
+import BigData from '../../public/images/BigData.png';
+import Technology from '../../public/images/Technology.png';
+import Science from '../../public/images/Science.png';
+import CyberSecurity from '../../public/images/CyberSecurity.png';
+import AI2 from '../../public/images/AI2.png';
+
 
 export const blogData = [
     {
@@ -7,7 +14,7 @@ export const blogData = [
       content: "Yapay zeka, birçok sektörde devrim yaratıyor. Sağlık, finans, eğitim gibi alanlarda yapay zeka uygulamaları hızla yayılıyor.",
       author: "Ahmet Yılmaz",
       createDate: "2024-07-01",
-      image: myImage,
+      image: ai,
       categoryId: 3,
       categoryName: "AI"
     },
@@ -17,7 +24,7 @@ export const blogData = [
       content: "Yazılım mühendisliği, sürekli gelişen bir alan olup, yeni teknolojiler ve metodolojilerle sürekli olarak yenilenmektedir.",
       author: "Elif Demir",
       createDate: "2024-07-05",
-      image: "https://via.placeholder.com/150/1E90FF/FFFFFF?text=Software",
+      image: SoftwareEngineer,
       categoryId: 1,
       categoryName: "Software"
     },
@@ -27,7 +34,7 @@ export const blogData = [
       content: "Büyük veri analitiği, işletmelerin veriyi anlamlandırarak stratejik kararlar almasına olanak tanıyor.",
       author: "Mehmet Kaya",
       createDate: "2024-07-10",
-      image: "https://via.placeholder.com/150/1E90FF/FFFFFF?text=IT",
+      image: BigData,
       categoryId: 2,
       categoryName: "IT"
     },
@@ -37,7 +44,7 @@ export const blogData = [
       content: "Teknoloji dünyası sürekli olarak yeniliklerle dolu. Bu yazıda, en son teknoloji trendlerini ele alıyoruz.",
       author: "Zeynep Çelik",
       createDate: "2024-07-12",
-      image: "https://via.placeholder.com/150/1E90FF/FFFFFF?text=Technology",
+      image: Technology,
       categoryId: 4,
       categoryName: "Technology"
     },
@@ -47,7 +54,7 @@ export const blogData = [
       content: "Bilim dünyasında her gün yeni buluşlar ve araştırmalar yapılıyor. Bu yazıda, son bilimsel gelişmeleri inceliyoruz.",
       author: "Ali Vural",
       createDate: "2024-07-15",
-      image: "https://via.placeholder.com/150/1E90FF/FFFFFF?text=Science",
+      image: Science,
       categoryId: 5,
       categoryName: "Science"
     },
@@ -57,7 +64,7 @@ export const blogData = [
       content: "Siber güvenlik, günümüz dijital dünyasında en önemli konulardan biri haline geldi. Bu yazıda, siber tehditler ve korunma yolları hakkında bilgi veriyoruz.",
       author: "Ayşe Koç",
       createDate: "2024-07-18",
-      image: "https://via.placeholder.com/150/1E90FF/FFFFFF?text=IT",
+      image: CyberSecurity,
       categoryId: 2,
       categoryName: "IT"
     },
@@ -67,7 +74,7 @@ export const blogData = [
       content: "Yapay zeka uygulamalarının etik boyutları, bu teknolojinin yaygınlaşmasıyla birlikte daha fazla tartışılmaya başlandı.",
       author: "Canan Arslan",
       createDate: "2024-07-20",
-      image: "https://via.placeholder.com/150/1E90FF/FFFFFF?text=AI",
+      image: AI2,
       categoryId: 3,
       categoryName: "AI"
     },
