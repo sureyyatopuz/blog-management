@@ -14,6 +14,7 @@ import { TiDeleteOutline } from "react-icons/ti";
 import PropTypes from "prop-types";
 import dayjs from "dayjs";
 import { useState } from "react";
+import AI3 from '../../public/images/AI3.png';
 
 const Main = ({ blogData, onDelete, onUpdate, searchTerm  }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -63,7 +64,7 @@ const Main = ({ blogData, onDelete, onUpdate, searchTerm  }) => {
               <Image
                 preview={false}
                 width={600}
-                src="https://www.fizikist.com/uploads/img/1722090407_mars-7459788-1280jpg.jpg"
+                src={AI3}
                 className="rounded-xl object-cover"
                 height={550}
               />
@@ -96,7 +97,7 @@ const Main = ({ blogData, onDelete, onUpdate, searchTerm  }) => {
       {/* Kategoriler / Blogs Section */}
       <div className="flex justify-center mt-10">
         <div className="flex flex-col w-3/4">
-          <h1 className="text-4xl font-semibold mb-6">Kategoriler</h1>
+          <h1 className="text-4xl font-semibold mb-6">Bloglar</h1>
 
           {filteredBlogs.map((blogItem, index) => (
             <div key={index} className="flex gap-x-6 mb-6">

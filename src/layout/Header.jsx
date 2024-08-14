@@ -19,10 +19,10 @@ const Header = ({ onSaved, onSearch, onSort }) => {
   return (
   
     <header className="flex flex-col">
-      <div className="flex h-16 bg-gray-100 justify-center items-center">
+      {/* <div className="flex h-16 bg-gray-100 justify-center items-center">
         Blog Tech
-      </div>
-      <div className="flex h-20 items-center justify-center">
+      </div> */}
+      <div className="fixed top-0 w-full bg-white z-50 flex h-20 items-center justify-center shadow-lg">
         <div className="flex w-3/4 justify-between items-center">
           <div className="flex gap-x-8">
             <span>Kategoriler</span>
