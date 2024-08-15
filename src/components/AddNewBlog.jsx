@@ -52,7 +52,7 @@ const AddNewBlog = ({ onSaved }) => {
         }}
         extra={
           <Space>
-            <Button onClick={onClose}>Cancel</Button>
+            <Button onClick={onClose}>İptal</Button>
             <Button onClick={() => form.submit()} type="primary">
               Ekle
             </Button>

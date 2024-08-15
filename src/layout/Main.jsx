@@ -57,7 +57,7 @@ const Main = ({ blogData, onDelete, onUpdate, searchTerm  }) => {
   return (
     <>
       {/* Hero Blog Section */}
-      <div className="flex justify-center bg-gray-100 ">
+      <div className="flex justify-center bg-gray-100 mt-16">
         <div className="flex w-3/4 justify-center bg-gray-100 max-w-full">
           <div className="flex justify-center mt-10 mb-16 max-w-full">
             <div className="flex justify-center w-3/5">
